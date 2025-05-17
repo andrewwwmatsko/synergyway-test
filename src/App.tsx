@@ -1,15 +1,17 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
-import DashboardPage from './pages/DashboardPage/DashboardPage';
 import Navigation from './components/Navigation/Navigation';
+import Loader from './components/Loader/Loader';
+
+const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
 
 function App() {
   return (
     <>
       <Navigation />
 
-      <Suspense fallback={<p>Loading ...</p>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
