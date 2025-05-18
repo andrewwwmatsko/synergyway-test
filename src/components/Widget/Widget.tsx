@@ -1,5 +1,5 @@
 import { Mosaic, MosaicWindow } from 'react-mosaic-component';
-import type { MosaicPath } from 'react-mosaic-component';
+import type { MosaicPath, MosaicNode } from 'react-mosaic-component';
 import 'react-mosaic-component/react-mosaic-component.css';
 import { useState, useCallback } from 'react';
 import type { Company } from '../../lib/types/Company.type';
@@ -29,6 +29,25 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
     setWindowState(prev => ({ ...prev, [newId]: '' }));
     return newId;
   }, []);
+
+  const [mosaicValue, setMosaicValue] = useState<MosaicNode<string>>({
+    direction: 'row',
+    first: 'a',
+    second: {
+      direction: 'column',
+      first: 'b',
+      second: 'c',
+    },
+  });
+
+  const addWindow = useCallback(() => {
+    const newId = createNode();
+    setMosaicValue(prev => ({
+      direction: 'row',
+      first: prev,
+      second: newId,
+    }));
+  }, [createNode]);
 
   const renderTile = useCallback(
     (id: string, path: MosaicPath) => {
@@ -63,19 +82,20 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
   );
 
   return (
-    <div className="h-screen w-full">
-      <Mosaic<string>
-        renderTile={renderTile}
-        initialValue={{
-          direction: 'row',
-          first: 'a',
-          second: {
-            direction: 'column',
-            first: 'b',
-            second: 'c',
-          },
-        }}
-      />
+    <div className="h-screen w-full flex flex-col">
+      <button
+        onClick={addWindow}
+        className="p-2 bg-blue-500  rounded m-2 self-start hover:cursor-pointer hover:bg-blue-800 transition"
+      >
+        <span className="text-white">Add new dashboard</span>
+      </button>
+      <div className="flex-1">
+        <Mosaic<string>
+          renderTile={renderTile}
+          value={mosaicValue}
+          onChange={newNode => setMosaicValue(newNode!)}
+        />
+      </div>
     </div>
   );
 };
