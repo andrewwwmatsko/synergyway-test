@@ -32,7 +32,9 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
           // @ts-ignore
           title={
             <div className="flex items-center gap-2">
-              <span className="font-semibold">Company info</span>
+              <span className="font-semibold text-base sm:inline hidden">
+                Company info
+              </span>
               <CompanySelector
                 companies={data}
                 value={windowState[id] || ''}

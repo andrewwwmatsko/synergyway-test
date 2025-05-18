@@ -6,7 +6,7 @@ const CompanySelector: React.FC<{
   onSelect: (ticker: string) => void;
 }> = ({ companies, value, onSelect }) => (
   <select
-    className="w-3xs p-0.5 text-sm border rounded bg-white my-2"
+    className="w-[120px] sm:w-[180px] xl:w-3xs p-0.5 sm:p-0 text-xs sm:text-sm border rounded bg-white my-2"
     value={value}
     onChange={e => onSelect(e.target.value)}
   >

@@ -7,28 +7,28 @@ const CompanyInfoWidget: React.FC<{
   const company = companies.find(c => c.ticker === selectedTicker);
   return (
     <div className="h-full flex flex-col bg-white shadow rounded-lg border border-gray-200">
-      <div className="flex-1 overflow-auto min-h-0 p-6">
+      <div className="flex-1 overflow-auto min-h-0 p-2 sm:p-4 md:p-6">
         {!company ? (
-          <div className="text-gray-400 text-center mt-10">
+          <div className="text-gray-400 text-center mt-10 text-xs sm:text-sm md:text-lg">
             Select a company to view info
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6 text-xs sm:text-sm md:text-base">
             <div>
-              <div className="flex flex-wrap gap-6 mb-4">
-                <div>
+              <div className="flex flex-wrap gap-2 sm:gap-4 md:gap-6 mb-4">
+                <div className="w-1/2 sm:w-auto">
                   <div className="font-medium text-gray-500">Ticker</div>
                   <div className="text-gray-900">{company.ticker}</div>
                 </div>
-                <div>
+                <div className="w-1/2 sm:w-auto">
                   <div className="font-medium text-gray-500">Name</div>
                   <div className="text-gray-900">{company.name}</div>
                 </div>
-                <div>
+                <div className="w-full sm:w-auto">
                   <div className="font-medium text-gray-500">Legal name</div>
                   <div className="text-gray-900">{company.legal_name}</div>
                 </div>
-                <div>
+                <div className="w-full sm:w-auto">
                   <div className="font-medium text-gray-500">
                     Stock exchange
                   </div>
@@ -50,7 +50,7 @@ const CompanyInfoWidget: React.FC<{
             </div>
             <hr className="my-2" />
             {/* Contact Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 md:gap-6">
               <div>
                 <div className="font-medium text-gray-500">Web</div>
                 <div className="text-blue-700 underline">
@@ -93,7 +93,7 @@ const CompanyInfoWidget: React.FC<{
               </div>
             </div>
             <hr className="my-2" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 md:gap-6">
               <div>
                 <div className="font-medium text-gray-500">Employees</div>
                 <div className="text-gray-900">{company.employees}</div>
