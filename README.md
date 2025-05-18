@@ -75,3 +75,8 @@ The build output will be in the `dist` directory.
 - Tailwind CSS
 - react-mosaic-component
 - BlueprintJS
+
+
+## Deployed version
+
+Feel free to check it online here: https://synergyway-test.vercel.app/
