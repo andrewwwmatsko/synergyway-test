@@ -5,6 +5,7 @@ import { useState, useCallback } from 'react';
 import type { Company } from '../../lib/types/Company.type';
 import CompanySelector from './CompanySelector/CompanySelector';
 import CompanyInfoWidget from './CompanyInfoWidget/CompanyInfoWidget';
+import MosaicToolbarControls from './MosaicToolbarControls';
 
 export type WidgetProps = {
   data: Company[];
@@ -21,6 +22,12 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
 
   const handleSelect = useCallback((id: string, ticker: string) => {
     setWindowState(prev => ({ ...prev, [id]: ticker }));
+  }, []);
+
+  const createNode = useCallback(() => {
+    const newId = `window-${Date.now()}`;
+    setWindowState(prev => ({ ...prev, [newId]: '' }));
+    return newId;
   }, []);
 
   const renderTile = useCallback(
@@ -42,6 +49,8 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
               />
             </div>
           }
+          toolbarControls={<MosaicToolbarControls path={path} />}
+          createNode={createNode}
         >
           <CompanyInfoWidget
             companies={data}
@@ -50,7 +59,7 @@ const Widget: React.FC<WidgetProps> = ({ data }) => {
         </MosaicWindow>
       );
     },
-    [data, windowState, handleSelect]
+    [data, windowState, handleSelect, createNode]
   );
 
   return (
